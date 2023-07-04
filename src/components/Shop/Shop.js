@@ -56,6 +56,10 @@ export default class Shop extends Component {
       this.setState({ shoppingCart: otherProducts });
    };
 
+   clearCart = () => {
+      this.setState({ shoppingCart: [] });
+   };
+
    render() {
       const { products, shoppingCart, socials } = this.state;
       return (
@@ -109,7 +113,7 @@ export default class Shop extends Component {
                      />
                   ))}
                </div>
-               <button className="btn btn-primary btn-purchase" type="button">
+               <button className="btn btn-primary btn-purchase" type="button" onClick={this.clearCart}>
                   Empty Cart
                </button>
             </section>
