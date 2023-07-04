@@ -39,6 +39,7 @@ export default class Shop extends Component {
    }
 
    render() {
+      const { products, shoppingCart, socials } = this.state;
       return (
          <>
             <header className="main-header">
@@ -59,14 +60,20 @@ export default class Shop extends Component {
             </header>
             <section className="container content-section">
                <div className="shop-items">
-                  <Product />
+                  {products.map((product) => (
+                     <Product {...product} key={product.id}/>
+                  ))}
                </div>
             </section>
             <section className="container content-section">
                <h2 className="section-header">CART</h2>
                <div className="cart-row">
-                  <span className="cart-item cart-header cart-column">ITEM</span>
-                  <span className="cart-price cart-header cart-column">PRICE</span>
+                  <span className="cart-item cart-header cart-column">
+                     ITEM
+                  </span>
+                  <span className="cart-price cart-header cart-column">
+                     PRICE
+                  </span>
                   <span className="cart-quantity cart-header cart-column">
                      Doing
                   </span>
