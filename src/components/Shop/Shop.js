@@ -48,6 +48,14 @@ export default class Shop extends Component {
       });
    };
 
+   removeFromCart = (id) => {
+      const otherProducts = this.state.shoppingCart.filter(
+         (product) => product.id !== id
+      );
+
+      this.setState({ shoppingCart: otherProducts });
+   };
+
    render() {
       const { products, shoppingCart, socials } = this.state;
       return (
@@ -94,7 +102,11 @@ export default class Shop extends Component {
                </div>
                <div className="cart-items">
                   {shoppingCart.map((product) => (
-                     <CartProduct {...product} key={product.id} />
+                     <CartProduct
+                        {...product}
+                        removeFromCart={this.removeFromCart}
+                        key={product.id}
+                     />
                   ))}
                </div>
                <button className="btn btn-primary btn-purchase" type="button">
