@@ -93,7 +93,9 @@ export default class Shop extends Component {
                   </span>
                </div>
                <div className="cart-items">
-                  <CartProduct />
+                  {shoppingCart.map((product) => (
+                     <CartProduct {...product} key={product.id} />
+                  ))}
                </div>
                <button className="btn btn-primary btn-purchase" type="button">
                   Empty Cart
