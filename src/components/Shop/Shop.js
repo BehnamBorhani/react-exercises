@@ -61,7 +61,7 @@ export default class Shop extends Component {
             <section className="container content-section">
                <div className="shop-items">
                   {products.map((product) => (
-                     <Product {...product} key={product.id}/>
+                     <Product {...product} key={product.id} />
                   ))}
                </div>
             </section>
@@ -89,7 +89,9 @@ export default class Shop extends Component {
                <div className="container main-footer-container">
                   <h3 className="band-name">The Generics</h3>
                   <ul className="nav footer-nav">
-                     <Social />
+                     {socials.map((social) => (
+                        <Social {...social} key={social.id} />
+                     ))}
                   </ul>
                </div>
             </footer>
