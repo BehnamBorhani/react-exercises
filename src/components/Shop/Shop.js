@@ -38,6 +38,16 @@ export default class Shop extends Component {
       };
    }
 
+   addToCart = (id) => {
+      const selectedProduct = this.state.products.find(
+         (product) => product.id === id
+      );
+
+      this.setState((prevState) => {
+         return { shoppingCart: [...prevState.shoppingCart, selectedProduct] };
+      });
+   };
+
    render() {
       const { products, shoppingCart, socials } = this.state;
       return (
@@ -61,7 +71,11 @@ export default class Shop extends Component {
             <section className="container content-section">
                <div className="shop-items">
                   {products.map((product) => (
-                     <Product {...product} key={product.id} />
+                     <Product
+                        {...product}
+                        addToCart={this.addToCart}
+                        key={product.id}
+                     />
                   ))}
                </div>
             </section>

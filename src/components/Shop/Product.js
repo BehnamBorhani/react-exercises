@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 export default class Product extends Component {
    render() {
-      const { title, price, img } = this.props;
+      const { id, title, price, img, addToCart } = this.props;
       return (
          <div className="shop-item">
             <span className="shop-item-title">{title}</span>
@@ -12,6 +12,7 @@ export default class Product extends Component {
                <button
                   className="btn btn-primary shop-item-button"
                   type="button"
+                  onClick={() => addToCart(id)}
                >
                   ADD TO CART
                </button>
