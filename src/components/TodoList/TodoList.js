@@ -10,21 +10,52 @@ export default class TodoList extends Component {
          todoTitle: "",
          status: "all",
       };
-
-      this.addTodo = this.addTodo.bind(this);
-      this.removeTodo = this.removeTodo.bind(this);
-      this.editTodo = this.editTodo.bind(this);
-      this.todoTitleHandler = this.todoTitleHandler.bind(this);
-      this.statusHandler = this.statusHandler.bind(this);
    }
 
+   addTodo = (event) => {
+      event.preventDefault();
+      const { todos, todoTitle } = this.state;
+
+      let newTodo = {
+         id: todos.length + 1,
+         title: todoTitle,
+         completed: false,
+      };
+
+      this.setState((prevState) => ({ todos: [...prevState.todos, newTodo] }));
+   };
+
+   removeTodo = () => {};
+
+   editTodo = () => {};
+
+   todoTitleHandler = (event) => {
+      this.setState({ todoTitle: event.target.value });
+   };
+
+   statusHandler = () => {};
+
    render() {
+      const { todos, todoTitle, status } = this.state;
       return (
          <>
             <Header />
             <form>
-               <input type="text" className="todo-input" maxLength="40" />
-               <button className="todo-button" type="submit">
+               <input
+                  type="text"
+                  className="todo-input"
+                  maxLength="40"
+                  value={todoTitle}
+                  onChange={this.todoTitleHandler}
+                  onKeyUp={(event) =>
+                     event.target.keyCode === 13 ? this.addTodo : null
+                  }
+               />
+               <button
+                  className="todo-button"
+                  type="submit"
+                  onClick={this.addTodo}
+               >
                   <i className="fas fa-plus-square"></i>
                </button>
                <div className="select">
