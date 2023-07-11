@@ -69,7 +69,9 @@ export default class TodoList extends Component {
 
             <div className="todo-container">
                <ul className="todo-list">
-                  <Todo />
+                  {todos.map((todo) => (
+                     <Todo {...todo} key={todo.id} />
+                  ))}
                </ul>
             </div>
          </>
