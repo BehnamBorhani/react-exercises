@@ -22,12 +22,26 @@ export default class TodoList extends Component {
          completed: false,
       };
 
-      this.setState((prevState) => ({ todos: [...prevState.todos, newTodo] }));
+      this.setState((prevState) => ({
+         todos: [...prevState.todos, newTodo],
+         todoTitle: "",
+      }));
    };
 
-   removeTodo = () => {};
+   removeTodo = (id) => {
+      let newTodos = this.state.todos.filter((todo) => todo.id !== id);
+      this.setState({ todos: newTodos });
+   };
 
-   editTodo = () => {};
+   editTodo = (id) => {
+      let newTodos = [...this.state.todos];
+      newTodos.forEach((todo) => {
+         if (todo.id === id) {
+            todo.completed = !todo.completed;
+         }
+      });
+      this.setState({ todos: newTodos });
+   };
 
    todoTitleHandler = (event) => {
       this.setState({ todoTitle: event.target.value });
@@ -40,22 +54,15 @@ export default class TodoList extends Component {
       return (
          <>
             <Header />
-            <form>
+            <form onSubmit={this.addTodo}>
                <input
                   type="text"
                   className="todo-input"
                   maxLength="40"
                   value={todoTitle}
                   onChange={this.todoTitleHandler}
-                  onKeyUp={(event) =>
-                     event.target.keyCode === 13 ? this.addTodo : null
-                  }
                />
-               <button
-                  className="todo-button"
-                  type="submit"
-                  onClick={this.addTodo}
-               >
+               <button className="todo-button" type="submit">
                   <i className="fas fa-plus-square"></i>
                </button>
                <div className="select">
@@ -70,7 +77,12 @@ export default class TodoList extends Component {
             <div className="todo-container">
                <ul className="todo-list">
                   {todos.map((todo) => (
-                     <Todo {...todo} key={todo.id} />
+                     <Todo
+                        {...todo}
+                        removeTodo={this.removeTodo}
+                        editTodo={this.editTodo}
+                        key={todo.id}
+                     />
                   ))}
                </ul>
             </div>
