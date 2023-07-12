@@ -48,6 +48,11 @@ export default class NoteApp extends Component {
       });
    };
 
+   removeNote = (noteId) => {
+      let otherNotes = this.state.notes.filter((note) => note.id !== noteId);
+      this.setState({ notes: otherNotes });
+   };
+
    render() {
       const { colors, notes, noteTitle, inputColor } = this.state;
       return (
@@ -119,7 +124,11 @@ export default class NoteApp extends Component {
                                     className="col-11 col-sm-11 col-md-11 col-lg-11 col-xl-11 p-3 card-columns"
                                  >
                                     {notes.map((note) => (
-                                       <Note {...note} key={note.id} />
+                                       <Note
+                                          {...note}
+                                          key={note.id}
+                                          removeNote={this.removeNote}
+                                       />
                                     ))}
                                  </div>
                               </div>

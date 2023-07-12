@@ -2,11 +2,12 @@ import React, { Component } from "react";
 
 export default class Note extends Component {
    render() {
-      const { id, title, color } = this.props;
+      const { id, title, color, removeNote } = this.props;
       return (
          <div
             className="card shadow-sm rounded"
             style={{ backgroundColor: color }}
+            onClick={() => removeNote(id)}
          >
             <p className="card-text p-3">{title}</p>
          </div>
