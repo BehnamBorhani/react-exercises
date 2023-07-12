@@ -34,6 +34,20 @@ export default class NoteApp extends Component {
       this.setState({ inputColor: color });
    };
 
+   addNote = () => {
+      const { notes, noteTitle, inputColor } = this.state;
+
+      let newNote = {
+         id: notes.length,
+         title: noteTitle,
+         color: inputColor,
+      };
+
+      this.setState((prevState) => {
+         return { notes: [...notes, newNote], noteTitle: "" };
+      });
+   };
+
    render() {
       const { colors, notes, noteTitle, inputColor } = this.state;
       return (
@@ -78,6 +92,7 @@ export default class NoteApp extends Component {
                                  id="btn-save"
                                  type="button"
                                  className="btn btn-outline-info"
+                                 onClick={this.addNote}
                               >
                                  <span className="fa fa-plus"></span>
                               </button>
@@ -103,7 +118,7 @@ export default class NoteApp extends Component {
                                     id="listed"
                                     className="col-11 col-sm-11 col-md-11 col-lg-11 col-xl-11 p-3 card-columns"
                                  >
-                                    <Note />
+                                    
                                  </div>
                               </div>
                            </div>
