@@ -30,6 +30,10 @@ export default class NoteApp extends Component {
       this.setState({ noteTitle: event.target.value });
    };
 
+   inputColorHandler = (color) => {
+      this.setState({ inputColor: color });
+   };
+
    render() {
       const { colors, notes, noteTitle, inputColor } = this.state;
       return (
@@ -59,7 +63,13 @@ export default class NoteApp extends Component {
                            <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mx-auto">
                               <div id="color-select">
                                  {colors.map((color, index) => (
-                                    <ColorBox color={color} key={index} />
+                                    <ColorBox
+                                       color={color}
+                                       key={index}
+                                       inputColorHandler={
+                                          this.inputColorHandler
+                                       }
+                                    />
                                  ))}
                               </div>
                            </div>
