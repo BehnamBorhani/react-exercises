@@ -44,13 +44,21 @@ export default class NoteApp extends Component {
       };
 
       this.setState((prevState) => {
-         return { notes: [...notes, newNote], noteTitle: "" };
+         return {
+            notes: [...notes, newNote],
+            noteTitle: "",
+            inputColor: "#fff",
+         };
       });
    };
 
    removeNote = (noteId) => {
       let otherNotes = this.state.notes.filter((note) => note.id !== noteId);
       this.setState({ notes: otherNotes });
+   };
+
+   emptyNoteTitle = () => {
+      this.setState({ noteTitle: "", inputColor: "#fff" });
    };
 
    render() {
@@ -105,6 +113,7 @@ export default class NoteApp extends Component {
                                  id="btn-delete"
                                  type="button"
                                  className="btn btn-outline-danger"
+                                 onClick={this.emptyNoteTitle}
                               >
                                  <span
                                     id="btn-icon"
