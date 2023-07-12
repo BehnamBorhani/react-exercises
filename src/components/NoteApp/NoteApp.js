@@ -26,7 +26,12 @@ export default class NoteApp extends Component {
       };
    }
 
+   noteTitleHandler = (event) => {
+      this.setState({ noteTitle: event.target.value });
+   };
+
    render() {
+      const { colors, notes, noteTitle, inputColor } = this.state;
       return (
          <>
             <div>
@@ -44,14 +49,18 @@ export default class NoteApp extends Component {
                                  className="form-control"
                                  type="text"
                                  style={{
-                                    backgroundColor: this.state.inputColor,
+                                    backgroundColor: inputColor,
                                  }}
                                  placeholder="Something here..."
+                                 value={noteTitle}
+                                 onChange={this.noteTitleHandler}
                               />
                            </div>
                            <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mx-auto">
                               <div id="color-select">
-                                 <ColorBox />
+                                 {colors.map((color, index) => (
+                                    <ColorBox color={color} key={index} />
+                                 ))}
                               </div>
                            </div>
                            <div className="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mx-auto my-1 text-right">
