@@ -13,10 +13,23 @@ export default function Form() {
       setSubmitted(true);
 
       if (firstNameData && lastNameData && emailData) {
-         setAllValid(true);
-         setTimeout(() => {
-            setAllValid(false);
-         }, 3000);
+         let newUser = { firstNameData, lastNameData, emailData };
+         fetch(
+            "https://firstproject-8da0b-default-rtdb.firebaseio.com/users.json",
+            {
+               method: "POST",
+               body: JSON.stringify(newUser),
+            }
+         ).then((response) => {
+            setAllValid(true);
+            setFirstNameData("");
+            setLastNameData("");
+            setEmailData("");
+
+            setTimeout(() => {
+               setAllValid(false);
+            }, 3000);
+         });
       }
    };
 
@@ -39,6 +52,7 @@ export default function Form() {
                type="text"
                placeholder="First Name"
                name="firstName"
+               value={firstNameData}
                onChange={(event) => setFirstNameData(event.target.value)}
             />
             {/* Uncomment the next line to show the error message */}
@@ -51,6 +65,7 @@ export default function Form() {
                type="text"
                placeholder="Last Name"
                name="lastName"
+               value={lastNameData}
                onChange={(event) => setLastNameData(event.target.value)}
             />
             {/* Uncomment the next line to show the error message */}
@@ -63,6 +78,7 @@ export default function Form() {
                type="text"
                placeholder="Email"
                name="email"
+               value={emailData}
                onChange={(event) => setEmailData(event.target.value)}
             />
             {/* Uncomment the next line to show the error message */}
