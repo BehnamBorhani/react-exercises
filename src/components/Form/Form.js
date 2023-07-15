@@ -2,18 +2,25 @@ import React, { useState } from "react";
 import "./Form.css";
 
 export default function Form() {
-   const [firstNameData, setFirstNameData] = useState("");
-   const [lastNameData, setLastNameData] = useState("");
-   const [emailData, setEmailData] = useState("");
-   const [submitted, setSubmitted] = useState(false);
-   const [allValid, setAllValid] = useState(false);
+   const [userData, setUserData] = useState({
+      firstName: "",
+      lastName: "",
+      email: "",
+   });
+   const [validation, setValidation] = useState({
+      submitted: false,
+      allValid: false,
+   });
+   
+   const { firstName, lastName, email } = userData;
+   const { submitted, allValid } = validation;
 
    const submitHandler = (event) => {
       event.preventDefault();
-      setSubmitted(true);
+      setValidation((prevState) => ({ ...prevState, submitted: true }));
 
-      if (firstNameData && lastNameData && emailData) {
-         let newUser = { firstNameData, lastNameData, emailData };
+      if (firstName && lastName && email) {
+         let newUser = { firstName, lastName, email };
          fetch(
             "https://firstproject-8da0b-default-rtdb.firebaseio.com/users.json",
             {
@@ -21,13 +28,14 @@ export default function Form() {
                body: JSON.stringify(newUser),
             }
          ).then((response) => {
-            setAllValid(true);
-            setFirstNameData("");
-            setLastNameData("");
-            setEmailData("");
+            setValidation((prevState) => ({ ...prevState, allValid: true }));
+            setUserData({ firstName: "", lastName: "", email: "" });
 
             setTimeout(() => {
-               setAllValid(false);
+               setValidation((prevState) => ({
+                  ...prevState,
+                  allValid: false,
+               }));
             }, 3000);
          });
       }
@@ -52,11 +60,16 @@ export default function Form() {
                type="text"
                placeholder="First Name"
                name="firstName"
-               value={firstNameData}
-               onChange={(event) => setFirstNameData(event.target.value)}
+               value={firstName}
+               onChange={(event) =>
+                  setUserData((prevState) => ({
+                     ...prevState,
+                     firstName: event.target.value,
+                  }))
+               }
             />
             {/* Uncomment the next line to show the error message */}
-            {submitted && !firstNameData && (
+            {submitted && !firstName && (
                <span id="first-name-error">Please enter a first name</span>
             )}
             <input
@@ -65,11 +78,16 @@ export default function Form() {
                type="text"
                placeholder="Last Name"
                name="lastName"
-               value={lastNameData}
-               onChange={(event) => setLastNameData(event.target.value)}
+               value={lastName}
+               onChange={(event) =>
+                  setUserData((prevState) => ({
+                     ...prevState,
+                     lastName: event.target.value,
+                  }))
+               }
             />
             {/* Uncomment the next line to show the error message */}
-            {submitted && !lastNameData && (
+            {submitted && !lastName && (
                <span id="last-name-error">Please enter a last name</span>
             )}
             <input
@@ -78,11 +96,16 @@ export default function Form() {
                type="text"
                placeholder="Email"
                name="email"
-               value={emailData}
-               onChange={(event) => setEmailData(event.target.value)}
+               value={email}
+               onChange={(event) =>
+                  setUserData((prevState) => ({
+                     ...prevState,
+                     email: event.target.value,
+                  }))
+               }
             />
             {/* Uncomment the next line to show the error message */}
-            {submitted && !emailData && (
+            {submitted && !email && (
                <span id="email-error">Please enter an email address</span>
             )}
             <button className="form-field" type="submit">
