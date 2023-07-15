@@ -1,12 +1,10 @@
-import React, { Component } from 'react'
-import Quiz from './components/Quiz/Quiz'
+import React, { Component } from "react";
+import Quiz from "./components/Quiz/Quiz";
 
-export default class App extends Component {
-    render() {
-        return (
-            <div>
-                <Quiz />
-            </div>
-        )
-    }
+export default function App() {
+   return (
+      <div>
+         <Quiz />
+      </div>
+   );
 }
