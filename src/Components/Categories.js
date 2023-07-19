@@ -1,15 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-const Categories = () => {
+const Categories = ({ menu }) => {
+   const [categories, setCategories] = useState([]);
+
+   useEffect(() => {
+      let categoriesSet = new Set();
+      menu.forEach((item) => {
+         categoriesSet.add(item.category);
+      });
+      setCategories(["All", ...categoriesSet]);
+   }, []);
+
    return (
       <div className="btn-container">
-         <button
-            type="button"
-            // highlight class  for highlight main category
-            className="filter-btn"
-         >
-            All
-         </button>
+         {categories.map((category) => (
+            <button
+               type="button"
+               // highlight class  for highlight main category
+               className="filter-btn"
+               key={category}
+            >
+               {category}
+            </button>
+         ))}
       </div>
    );
 };
