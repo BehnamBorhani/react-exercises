@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 
-const Menu = ({ menu, mainCategory, setMainCategory }) => {
-   const [categoryItems, setCategoryItems] = useState(menu);
-
+const Menu = ({ mainCategoryItems }) => {
    return (
       <div className="section-center">
-         {categoryItems.map((item) => (
+         {mainCategoryItems.map((item) => (
             <article className="menu-item" key={item.id}>
                <img src={item.img} className="photo" />
                <div className="item-info">
