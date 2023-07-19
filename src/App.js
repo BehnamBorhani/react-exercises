@@ -1,12 +1,10 @@
-import React, { Component } from 'react'
-import Ticket from './components/Ticket/Ticket'
+import React from "react";
+import Ticket from "./components/Ticket/Ticket";
 
-export default class App extends Component {
-    render() {
-        return (
-            <div>
-                <Ticket />
-            </div>
-        )
-    }
+export default function App() {
+   return (
+      <div>
+         <Ticket />
+      </div>
+   );
 }
