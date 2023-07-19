@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from "react";
-import Menu from "./Components/Menu";
-import data from "./data";
 import "./App.css";
+import data from "./data";
+import Menu from "./Components/Menu";
 import Categories from "./Components/Categories";
+
+const allCategories = ["All", ...new Set(data.map((item) => item.category))];
 
 function App() {
    const [menu, setMenu] = useState(data);
+   const [categories, setCategories] = useState(allCategories);
    const [mainCategory, setMainCategory] = useState("All");
-   const [mainCategoryItems, setMainCategoryItems] = useState([]);
 
    useEffect(() => {
       if (mainCategory === "All") {
-         setMainCategoryItems(menu);
+         setMenu(data);
       } else {
-         setMainCategoryItems(
-            menu.filter((item) => item.category === mainCategory)
-         );
+         setMenu(data.filter((item) => item.category === mainCategory));
       }
    }, [mainCategory]);
 
@@ -26,11 +26,11 @@ function App() {
                <h2>our menu</h2>
                <div className="underline"></div>
                <Categories
-                  menu={menu}
+                  categories={categories}
                   mainCategory={mainCategory}
                   setMainCategory={setMainCategory}
                />
-               <Menu mainCategoryItems={mainCategoryItems} />
+               <Menu menu={menu} />
             </div>
          </section>
       </main>

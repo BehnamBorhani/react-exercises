@@ -1,9 +1,9 @@
 import React from "react";
 
-const Menu = ({ mainCategoryItems }) => {
+const Menu = ({ menu }) => {
    return (
       <div className="section-center">
-         {mainCategoryItems.map((item) => (
+         {menu.map((item) => (
             <article className="menu-item" key={item.id}>
                <img src={item.img} className="photo" />
                <div className="item-info">

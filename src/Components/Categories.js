@@ -1,25 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
-const Categories = ({ menu, mainCategory, setMainCategory }) => {
-   const [categories, setCategories] = useState([]);
-
-   useEffect(() => {
-      let categoriesSet = new Set();
-      menu.forEach((item) => {
-         categoriesSet.add(item.category);
-      });
-      setCategories(["All", ...categoriesSet]);
-   }, []);
-
+const Categories = ({ categories, mainCategory, setMainCategory }) => {
    return (
       <div className="btn-container">
          {categories.map((category) => (
             <button
                type="button"
                // highlight class  for highlight main category
-               className={`filter-btn ${
-                  category === mainCategory && "highlight"
-               }`}
+               className={
+                  category === mainCategory
+                     ? "filter-btn highlight"
+                     : "filter-btn"
+               }
                key={category}
                onClick={() => setMainCategory(category)}
             >
