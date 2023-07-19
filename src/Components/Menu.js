@@ -1,18 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 
-const Menu = () => {
+const Menu = ({ menu, mainCategory, setMainCategory }) => {
+   const [categoryItems, setCategoryItems] = useState(menu);
+
    return (
       <div className="section-center">
-         <article className="menu-item">
-            <img src="./images/item-8.jpeg" className="photo" />
-            <div className="item-info">
-               <header>
-                  <h4>Menu Title</h4>
-                  <h4 className="price">$89</h4>
-               </header>
-               <p className="item-text">desc here</p>
-            </div>
-         </article>
+         {categoryItems.map((item) => (
+            <article className="menu-item" key={item.id}>
+               <img src={item.img} className="photo" />
+               <div className="item-info">
+                  <header>
+                     <h4>{item.title}</h4>
+                     <h4 className="price">${item.price}</h4>
+                  </header>
+                  <p className="item-text">{item.desc}</p>
+               </div>
+            </article>
+         ))}
       </div>
    );
 };

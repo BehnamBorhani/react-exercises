@@ -19,7 +19,11 @@ function App() {
                   mainCategory={mainCategory}
                   setMainCategory={setMainCategory}
                />
-               <Menu />
+               <Menu
+                  menu={menu}
+                  mainCategory={mainCategory}
+                  setMainCategory={setMainCategory}
+               />
             </div>
          </section>
       </main>
